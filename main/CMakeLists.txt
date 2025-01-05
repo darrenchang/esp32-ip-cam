@@ -1,5 +1,7 @@
 idf_component_register(
-  SRCS "esp32_ip_cam.c"
+  SRCS "esp32_nat_router.c"
+       "http_server.c"
+       "esp32_ip_cam.c"
   INCLUDE_DIRS "."
 )
 

@@ -637,6 +637,18 @@ void app_main(void)
            "Use UP/DOWN arrows to navigate through command history.\n"
            "Press TAB when typing command name to auto-complete.\n");
 
+    printf("\n"
+           "It you want to disable the web interface (e.g. for security reasons):\n"
+           "'nvs_namespace esp32_nat'\n"
+           "'nvs_set lock str -v 1'\n"
+           "'restart'\n");
+
+    printf("\n"
+           "Enable the web interface:\n"
+           "'nvs_namespace esp32_nat'\n"
+           "'nvs_set lock str -v 0'\n"
+           "'restart'\n");
+
     if (strlen(ssid) == 0) {
          printf("\n"
                "Unconfigured WiFi\n"
