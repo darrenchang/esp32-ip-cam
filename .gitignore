@@ -1,0 +1,8 @@
+build/**
+sdkconfig.*
+sdkconfig.old
+!sdkconfig.defaults
+**/.DS_Store
+**/__pycache__
+build/
+managed_components/
