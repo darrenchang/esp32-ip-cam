@@ -162,8 +162,28 @@ static esp_err_t init_camera(void)
 }
 #endif
 
+#define LED_PIN 4 // Onboard LED for AI-Thinker module
+
+static void init_led()
+{
+    // Configure the LED pin as an output
+    esp_rom_gpio_pad_select_gpio(LED_PIN);
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
+}
+
+static void flash_led()
+{
+    // Turn the LED on
+    gpio_set_level(LED_PIN, 1);
+    vTaskDelay(100 / portTICK_RATE_MS); // Delay for 100ms to simulate a flash
+    // Turn the LED off
+    gpio_set_level(LED_PIN, 0);
+}
+
 void app_main(void)
 {
+  init_led(); // Initialize the LED GPIO
+
 #if ESP_CAMERA_SUPPORTED
     if(ESP_OK != init_camera()) {
         return;
@@ -172,6 +192,7 @@ void app_main(void)
     while (1)
     {
         ESP_LOGI(TAG, "Taking picture...");
+        flash_led();
         camera_fb_t *pic = esp_camera_fb_get();
 
         // use pic->buf to access the image
