@@ -152,6 +152,8 @@ static esp_err_t init_camera(void)
 {
     //initialize the camera
     esp_err_t err = esp_camera_init(&camera_config);
+    camera_config.frame_size = FRAMESIZE_QQVGA; // Lower resolution
+    camera_config.fb_count = 1; // Single frame buffer
     if (err != ESP_OK)
     {
         ESP_LOGE(TAG, "Camera Init Failed!!!!");
@@ -174,10 +176,13 @@ static void init_led()
 static void flash_led()
 {
     // Turn the LED on
+    ESP_LOGI(TAG, "Flashing LED...");
     gpio_set_level(LED_PIN, 1);
-    vTaskDelay(100 / portTICK_RATE_MS); // Delay for 100ms to simulate a flash
+    ESP_LOGI(TAG, "Turned on LED");
+    vTaskDelay(20 / portTICK_RATE_MS); // Delay for 100ms to simulate a flash
     // Turn the LED off
     gpio_set_level(LED_PIN, 0);
+    ESP_LOGI(TAG, "Turned off LED");
 }
 
 void app_main(void)
